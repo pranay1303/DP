@@ -1,0 +1,149 @@
+.contact-container {
+    position: relative;
+    background: url("../Img/medicinal-plant-bg.jpg") no-repeat center center/cover;
+    color: white;
+    padding: 80px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.contact-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+.contact-container .contact-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.contact-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.contact-container p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.contact-container h2 {
+    color: rgb(155, 243, 24);
+}
+
+/* Contact Page Card Layout */
+.contact-container .card-group {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 1400px;
+    padding: 10px;
+    overflow-x: auto; /* Allows scrolling on smaller screens */
+}
+
+.contact-container .card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease-in-out;
+    min-width: 220px;
+    max-width: 340px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.contact-container .card:hover {
+    transform: scale(1.05);
+}
+
+/* Updated Card Image Fix */
+.contact-container .card-img {
+    width: 100%;
+    min-height: 240px;
+    height: 25px;
+    max-height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Buttons */
+.contact-container .contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.contact-container .btn {
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.contact-container .call-btn {
+    background-color: yellow;
+    color: black;
+}
+
+.contact-container .call-btn:hover {
+    background-color: gold;
+}
+
+.contact-container .text-btn {
+    background-color: lightgreen;
+    color: black;
+}
+
+.contact-container .text-btn:hover {
+    background-color: green;
+    color: white;
+}
+
+/* Responsive Fixes */
+@media (max-width: 1200px) {
+    .contact-container .card-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .contact-container .card {
+        width: calc(100% / 3 - 15px);
+    }
+}
+
+@media (max-width: 992px) {
+    .contact-container .card {
+        width: calc(100% / 2 - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container .card {
+        width: 100%;
+    }
+    .contact-container .contact-buttons {
+        flex-direction: column;
+    }
+}
