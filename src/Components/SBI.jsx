@@ -4,16 +4,17 @@ import "../Styles/SBI.css";
 const SBI = () => {
   const [image, setImage] = useState(null);
   const [output, setOutput] = useState("");
+  const [plantInfo, setPlantInfo] = useState([]);
 
   // Handle image upload
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setImage(file); // Save the file itself, not just the URL
+      setImage(file);
     }
   };
 
-  // Real prediction function: Send image to FastAPI backend
+  // Prediction function: Send image to FastAPI backend
   const handlePredict = async () => {
     if (!image) {
       setOutput("⚠️ Please upload an image first.");
@@ -24,6 +25,9 @@ const SBI = () => {
     formData.append("file", image);
 
     try {
+      setOutput("🔄 Predicting... Please wait.");
+      setPlantInfo([]);
+
       const response = await fetch("http://127.0.0.1:8000/predict/", {
         method: "POST",
         body: formData,
@@ -35,9 +39,14 @@ const SBI = () => {
 
       const data = await response.json();
       setOutput(`🌿 Predicted Plant: ${data.label} (Confidence: ${(data.confidence_score * 100).toFixed(2)}%)`);
+      
+      const points = data.plant_info.split('\n').filter(point => point.trim() !== '');
+      setPlantInfo(points);
+
     } catch (error) {
       console.error(error);
       setOutput("❌ Prediction failed. Please try again.");
+      setPlantInfo([]);
     }
   };
 
@@ -65,6 +74,17 @@ const SBI = () => {
         <div className="sbi-output">
           <h2>📊 Prediction Result</h2>
           <p>{output}</p>
+
+          {plantInfo.length > 0 && (
+            <div className="plant-info">
+              <h3>🧪 About the Plant:</h3>
+              <ul>
+                {plantInfo.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
       </div>
