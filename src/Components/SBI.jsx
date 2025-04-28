@@ -6,7 +6,6 @@ const SBI = () => {
   const [output, setOutput] = useState("");
   const [plantInfo, setPlantInfo] = useState([]);
 
-  // Handle image upload
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -14,7 +13,6 @@ const SBI = () => {
     }
   };
 
-  // Prediction function: Send image to FastAPI backend
   const handlePredict = async () => {
     if (!image) {
       setOutput("⚠️ Please upload an image first.");
@@ -50,11 +48,18 @@ const SBI = () => {
     }
   };
 
+  // Utility to replace *text* and **text** with <strong>text</strong>
+  const formatText = (text) => {
+    let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    formatted = formatted.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+    return formatted;
+  };
+
   return (
     <div className="sbi-container">
       <div className="sbi-content">
         
-        {/* 📥 Upload Image Section */}
+        {/* Upload Image Section */}
         <div className="sbi-input">
           <h2>🌱 Search by Image</h2>
           <p>Upload an image to analyze medicinal plants.</p>
@@ -70,18 +75,28 @@ const SBI = () => {
           <button onClick={handlePredict}>🔍 Predict</button>
         </div>
 
-        {/* 📤 Prediction Output Section */}
+        {/* Prediction Output Section */}
         <div className="sbi-output">
           <h2>📊 Prediction Result</h2>
-          <p>{output}</p>
+          <p className="predicted-plant">{output}</p>
 
           {plantInfo.length > 0 && (
             <div className="plant-info">
               <h3>🧪 About the Plant:</h3>
+              <br /> {/* Add line break after the heading */}
               <ul>
-                {plantInfo.map((point, index) => (
-                  <li key={index}>{point}</li>
-                ))}
+                {plantInfo.map((point, index) => {
+                  const splitPoint = point.split(':');
+                  const title = splitPoint[0].trim();
+                  const description = splitPoint.slice(1).join(':').trim();
+                  return (
+                    <li key={index} className="predicted-plant">
+                      <strong dangerouslySetInnerHTML={{ __html: formatText(title) }} />:{" "}
+                      <span dangerouslySetInnerHTML={{ __html: formatText(description) }} />
+                      <br /> {/* Add line break after each description */}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           )}
