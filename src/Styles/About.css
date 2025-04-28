@@ -1,0 +1,115 @@
+.about-container {
+    position: relative;
+    background: url("../Img/medicinal-plant-bg.jpg") no-repeat center center/cover;
+    color: white;
+    padding: 80px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.about-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+.about-container .about-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.about-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.about-container h2 {
+    text-decoration: wavy;
+    color: rgb(155, 243, 24);
+}
+
+/* About Page Card Layout */
+.about-container .card-group {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 1400px;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+.about-container .card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 15px;
+    width: calc(100% / 4 - 10px);
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease-in-out;
+    min-width: 220px;
+}
+
+.about-container .card:hover {
+    transform: scale(1.05);
+}
+
+.about-container .card-img {
+    width: 100%;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Responsive Fix */
+@media (max-width: 1200px) {
+    .about-container .card-group {
+        max-width: 1000px;
+    }
+    .about-container .card {
+        width: calc(100% / 4 - 10px);
+    }
+}
+
+@media (max-width: 992px) {
+    .about-container .card-group {
+        max-width: 800px;
+    }
+    .about-container .card {
+        width: calc(100% / 3 - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-container .card-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .about-container .card {
+        width: calc(100% / 2 - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container .card {
+        width: 100%;
+    }
+}

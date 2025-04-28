@@ -1,0 +1,14 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background: url("../Img/medicinal-plant-bg.jpg") no-repeat center center/cover;
+}
+html{
+  overflow-x: hidden;
+}
